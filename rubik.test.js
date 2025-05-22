@@ -1,18 +1,19 @@
 const {calculate_order, base_moves} = require('./rubik');
 
 describe("calculate_order", () => {
-    var moves = ["L", "R", "F", "B", "U", "D"];
-    for (var i in moves) {
-        test("Order of " + moves[i] + " is 4", () => {
-            expect(calculate_order(moves[i])).toBe(4);
-        });
-        test("Order of " + moves[i] + "' is 4", () => {
-            expect(calculate_order(moves[i] + "'")).toBe(4);
-        });
-    }
-    test("Order of R' is 4", () => {
-        expect(calculate_order("R'")).toBe(4);
-    });
+    test("Order of L is 4", () => { expect(calculate_order("L")).toBe(4); });
+    test("Order of R is 4", () => { expect(calculate_order("R")).toBe(4); });
+    test("Order of F is 4", () => { expect(calculate_order("F")).toBe(4); });
+    test("Order of B is 4", () => { expect(calculate_order("B")).toBe(4); });
+    test("Order of U is 4", () => { expect(calculate_order("U")).toBe(4); });
+    test("Order of D is 4", () => { expect(calculate_order("D")).toBe(4); });
+    test("Order of L' is 4", () => { expect(calculate_order("L'")).toBe(4); });
+    test("Order of R' is 4", () => { expect(calculate_order("R'")).toBe(4); });
+    test("Order of F' is 4", () => { expect(calculate_order("F'")).toBe(4); });
+    test("Order of B' is 4", () => { expect(calculate_order("B'")).toBe(4); });
+    test("Order of U' is 4", () => { expect(calculate_order("U'")).toBe(4); });
+    test("Order of D' is 4", () => { expect(calculate_order("D'")).toBe(4); });
+
     test("Order of RR' is 1", () => {
         expect(calculate_order("RR'")).toBe(1);
     });
@@ -33,19 +34,24 @@ describe("centres_static", () => {
     }
 });
 
-describe("are_permutations", () => {
-    var moves = ["L", "R", "F", "B", "U", "D"];
-    for (var i in moves) {
-        test(moves[i] + " is a permutation", () => {
-            for (var j = 0; j < 54; j++) {
-                var n = 0;
-                for (var k = 0; k < 54; k++) {
-                    if (base_moves[moves[i]][k] == j) {
-                        n++;
-                    }
-                }
-                expect(n).toBe(1);
+function check_is_perm(i) {
+    for (var j = 0; j < 54; j++) {
+        var n = 0;
+        for (var k = 0; k < 54; k++) {
+            if (base_moves[i][k] == j) {
+                n++;
             }
-        });
+        }
+        if (i == "F") {console.log(k + " -> " + n);}
+        expect(n).toBe(1);
     }
+}
+
+describe("are_permutations", () => {
+    test("L is a permutation", () => { check_is_perm("L") });
+    test("R is a permutation", () => { check_is_perm("R") });
+    test("F is a permutation", () => { check_is_perm("F") });
+    test("B is a permutation", () => { check_is_perm("B") });
+    test("U is a permutation", () => { check_is_perm("U") });
+    test("D is a permutation", () => { check_is_perm("D") });
 });
