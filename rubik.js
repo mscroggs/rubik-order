@@ -134,6 +134,9 @@ function calculate_order(moves) {
     var n = 1;
     var position = combo;
     while (!is_in_order(position)) {
+        if (n >= 100000) {
+            throw "Maximum repetitions exceeded";
+        }
         position = apply(combo, position);
         n++;
     }
