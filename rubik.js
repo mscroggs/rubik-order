@@ -18,6 +18,8 @@ Arrangement:
          51,52,53
 */
 
+var face_colors = ["blue", "white", "red", "yellow", "green", "orange"];
+
 var base_moves = {
     "U": Array(
          6, 3, 0, 7, 4, 1, 8, 5, 2,
@@ -154,4 +156,61 @@ function calculate_order(combo) {
     return n;
 }
 
-module.exports = { calculate_order, base_moves, get_combo, parse_and_calculate_order };
+function get_color(n) {
+    return face_colors[Math.floor(n / 9)];
+}
+
+function generate_diagram(combo) {
+    var x = [-Math.sqrt(0.99), -0.1];
+    var y = [Math.sqrt(0.36), -0.5];
+    var z = [0, 1.0];
+    function line(a, b) {
+        return "<line x1='" + a[0] + "' y1='" + a[1] + "' x2='" + b[0] + "' y2='" + b[1] + "' stroke='#000000' stroke-width='3.0' stroke-linecap='round' />\n";
+    }
+    function fill(a, b, c, d, color) {
+        return "<polygon points='" + a[0] + "," + a[1] + " " + b[0] + "," + b[1] + " " + c[0] + "," + c[1] + " " + d[0] + "," + d[1] + "' style='fill:" + color + "' />\n"
+    }
+    function p3d(a, b, c) {
+        return [
+            155 + 50 * (a * x[0] + b * y[0] + c * z[0]),
+            100 + 50 * (a * x[1] + b * y[1] + c * z[1]),
+        ];
+    }
+    svg = "<svg width='250' height='260' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>\n"
+
+    for (var i = 0; i < 3; i++) {
+        for (var j = 0; j < 3; j++) {
+            svg += fill(p3d(3-j, 3-i, 0), p3d(2-j, 3-i, 0), p3d(2-j, 2-i, 0), p3d(3-j, 2-i, 0), get_color(combo[3*i + j]));
+        }
+    }
+    for (var i = 0; i < 3; i++) {
+        for (var j = 0; j < 3; j++) {
+            svg += fill(p3d(3-j, 0, i), p3d(2-j, 0, i), p3d(2-j, 0, i+1), p3d(3-j, 0, i+1), get_color(combo[18+3*i + j]));
+        }
+    }
+    for (var i = 0; i < 3; i++) {
+        for (var j = 0; j < 3; j++) {
+            svg += fill(p3d(0, j, i), p3d(0, j+1, i), p3d(0, j+1, i+1), p3d(0, j, i+1), get_color(combo[27+3*i + j]));
+        }
+    }
+
+    for (var a = 0; a <= 3; a++) {
+        svg += line(p3d(a,0,0), p3d(a,0,3));
+        svg += line(p3d(a,0,0), p3d(a,3,0));
+    }
+    for (var b = 1; b <= 3; b++) {
+        svg += line(p3d(0,b,0), p3d(0,b,3));
+        svg += line(p3d(0,b,0), p3d(3,b,0));
+    }
+    for (var c = 0; c <= 3; c++) {
+        svg += line(p3d(0,0,c), p3d(3,0,c));
+        svg += line(p3d(0,0,c), p3d(0,3,c));
+    }
+    svg += "</svg>"
+    return svg;
+}
+
+if (typeof module !== "undefined") {
+    module.exports = { calculate_order, base_moves, get_combo, parse_and_calculate_order,
+                       generate_diagram };
+}
