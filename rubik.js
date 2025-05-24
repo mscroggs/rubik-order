@@ -137,9 +137,11 @@ function get_combo(moves) {
     return combine(parse(moves));
 }
 
-function calculate_order(moves) {
-    var combo = get_combo(moves);
+function parse_and_calculate_order(moves) {
+    return calculate_order(get_combo(moves));
+}
 
+function calculate_order(combo) {
     var n = 1;
     var position = combo;
     while (!is_in_order(position)) {
@@ -152,4 +154,4 @@ function calculate_order(moves) {
     return n;
 }
 
-module.exports = { calculate_order, base_moves, get_combo };
+module.exports = { calculate_order, base_moves, get_combo, parse_and_calculate_order };

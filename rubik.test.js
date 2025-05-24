@@ -1,45 +1,51 @@
-const {calculate_order, base_moves} = require('./rubik');
+const {
+    calculate_order, base_moves, get_combo, parse_and_calculate_order
+} = require('./rubik');
 
-describe("calculate_order", () => {
-    test("Order of L is 4", () => { expect(calculate_order("L")).toBe(4); });
-    test("Order of R is 4", () => { expect(calculate_order("R")).toBe(4); });
-    test("Order of F is 4", () => { expect(calculate_order("F")).toBe(4); });
-    test("Order of B is 4", () => { expect(calculate_order("B")).toBe(4); });
-    test("Order of U is 4", () => { expect(calculate_order("U")).toBe(4); });
-    test("Order of D is 4", () => { expect(calculate_order("D")).toBe(4); });
+describe("parse_and_calculate_order", () => {
+    test("Order of L is 4", () => { expect(parse_and_calculate_order("L")).toBe(4); });
+    test("Order of R is 4", () => { expect(parse_and_calculate_order("R")).toBe(4); });
+    test("Order of F is 4", () => { expect(parse_and_calculate_order("F")).toBe(4); });
+    test("Order of B is 4", () => { expect(parse_and_calculate_order("B")).toBe(4); });
+    test("Order of U is 4", () => { expect(parse_and_calculate_order("U")).toBe(4); });
+    test("Order of D is 4", () => { expect(parse_and_calculate_order("D")).toBe(4); });
 
-    test("Order of L' is 4", () => { expect(calculate_order("L'")).toBe(4); });
-    test("Order of R' is 4", () => { expect(calculate_order("R'")).toBe(4); });
-    test("Order of F' is 4", () => { expect(calculate_order("F'")).toBe(4); });
-    test("Order of B' is 4", () => { expect(calculate_order("B'")).toBe(4); });
-    test("Order of U' is 4", () => { expect(calculate_order("U'")).toBe(4); });
-    test("Order of D' is 4", () => { expect(calculate_order("D'")).toBe(4); });
+    test("Order of L' is 4", () => { expect(parse_and_calculate_order("L'")).toBe(4); });
+    test("Order of R' is 4", () => { expect(parse_and_calculate_order("R'")).toBe(4); });
+    test("Order of F' is 4", () => { expect(parse_and_calculate_order("F'")).toBe(4); });
+    test("Order of B' is 4", () => { expect(parse_and_calculate_order("B'")).toBe(4); });
+    test("Order of U' is 4", () => { expect(parse_and_calculate_order("U'")).toBe(4); });
+    test("Order of D' is 4", () => { expect(parse_and_calculate_order("D'")).toBe(4); });
 
-    test("Order of L2 is 2", () => { expect(calculate_order("L2")).toBe(2); });
-    test("Order of R2 is 2", () => { expect(calculate_order("R2")).toBe(2); });
-    test("Order of F2 is 2", () => { expect(calculate_order("F2")).toBe(2); });
-    test("Order of B2 is 2", () => { expect(calculate_order("B2")).toBe(2); });
-    test("Order of U2 is 2", () => { expect(calculate_order("U2")).toBe(2); });
-    test("Order of D2 is 2", () => { expect(calculate_order("D2")).toBe(2); });
+    test("Order of L2 is 2", () => { expect(parse_and_calculate_order("L2")).toBe(2); });
+    test("Order of R2 is 2", () => { expect(parse_and_calculate_order("R2")).toBe(2); });
+    test("Order of F2 is 2", () => { expect(parse_and_calculate_order("F2")).toBe(2); });
+    test("Order of B2 is 2", () => { expect(parse_and_calculate_order("B2")).toBe(2); });
+    test("Order of U2 is 2", () => { expect(parse_and_calculate_order("U2")).toBe(2); });
+    test("Order of D2 is 2", () => { expect(parse_and_calculate_order("D2")).toBe(2); });
 
     test("Order of RR' is 1", () => {
-        expect(calculate_order("RR'")).toBe(1);
+        expect(parse_and_calculate_order("RR'")).toBe(1);
     });
     test("Order of RRRR is 1", () => {
-        expect(calculate_order("RRRR")).toBe(1);
+        expect(parse_and_calculate_order("RRRR")).toBe(1);
     });
 });
 
-describe("centres_static", () => {
-    var moves = ["L", "R", "F", "B", "U", "D"];
+function check_centres_static(i) {
     var centres = [4, 13, 22, 31, 40, 49];
-    for (var i in moves) {
-        for (var j in centres) {
-            test("" + moves[i] + "[" + j + "] = " + j, () => {
-                expect(base_moves[moves[i]][centres[j]]).toBe(centres[j]);
-            });
-        }
+    for (var j in centres) {
+        expect(base_moves[i][centres[j]]).toBe(centres[j]);
     }
+}
+
+describe("centres_static", () => {
+    test("L has static centres", () => { check_centres_static("L") });
+    test("R has static centres", () => { check_centres_static("R") });
+    test("F has static centres", () => { check_centres_static("F") });
+    test("B has static centres", () => { check_centres_static("B") });
+    test("U has static centres", () => { check_centres_static("U") });
+    test("D has static centres", () => { check_centres_static("D") });
 });
 
 function check_is_perm(i) {
