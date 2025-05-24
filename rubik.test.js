@@ -7,12 +7,20 @@ describe("calculate_order", () => {
     test("Order of B is 4", () => { expect(calculate_order("B")).toBe(4); });
     test("Order of U is 4", () => { expect(calculate_order("U")).toBe(4); });
     test("Order of D is 4", () => { expect(calculate_order("D")).toBe(4); });
+
     test("Order of L' is 4", () => { expect(calculate_order("L'")).toBe(4); });
     test("Order of R' is 4", () => { expect(calculate_order("R'")).toBe(4); });
     test("Order of F' is 4", () => { expect(calculate_order("F'")).toBe(4); });
     test("Order of B' is 4", () => { expect(calculate_order("B'")).toBe(4); });
     test("Order of U' is 4", () => { expect(calculate_order("U'")).toBe(4); });
     test("Order of D' is 4", () => { expect(calculate_order("D'")).toBe(4); });
+
+    test("Order of L2 is 2", () => { expect(calculate_order("L2")).toBe(2); });
+    test("Order of R2 is 2", () => { expect(calculate_order("R2")).toBe(2); });
+    test("Order of F2 is 2", () => { expect(calculate_order("F2")).toBe(2); });
+    test("Order of B2 is 2", () => { expect(calculate_order("B2")).toBe(2); });
+    test("Order of U2 is 2", () => { expect(calculate_order("U2")).toBe(2); });
+    test("Order of D2 is 2", () => { expect(calculate_order("D2")).toBe(2); });
 
     test("Order of RR' is 1", () => {
         expect(calculate_order("RR'")).toBe(1);
@@ -42,7 +50,6 @@ function check_is_perm(i) {
                 n++;
             }
         }
-        if (i == "F") {console.log(k + " -> " + n);}
         expect(n).toBe(1);
     }
 }

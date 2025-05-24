@@ -95,13 +95,15 @@ function is_in_order(list) {
 }
 
 function parse(moves) {
-    if (!moves.match(/([UDLRFB]'?)+/)) {
+    if (!moves.match(/(:?[UDLRFB](:?'|2)?)+/)) {
         throw "Invalid move string";
     }
     var out = [];
     for (var i in moves) {
         if (moves[i] == "'") {
             out[out.length - 1] += "'";
+        } else if (moves[i] == "2") {
+            out[out.length - 1] += "2";
         } else {
             out[out.length] = moves[i];
         }
@@ -116,7 +118,14 @@ function combine(moves) {
     }
     for (var m in moves) {
         if (moves[m].length == 2) {
-            out = apply_inverse(base_moves[moves[m].substring(0, 1)], out);
+            if (moves[m].substr(1) == "'") {
+                out = apply_inverse(base_moves[moves[m].substring(0, 1)], out);
+            } else if (moves[m].substr(1) == "2") {
+                out = apply(base_moves[moves[m].substring(0, 1)], out);
+                out = apply(base_moves[moves[m].substring(0, 1)], out);
+            } else {
+                throw "Invalid moves";
+            }
         } else {
             out = apply(base_moves[moves[m]], out);
         }
