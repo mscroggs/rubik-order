@@ -67,4 +67,20 @@ describe("are_permutations", () => {
     test("B is a permutation", () => { check_is_perm("B") });
     test("U is a permutation", () => { check_is_perm("U") });
     test("D is a permutation", () => { check_is_perm("D") });
+    test("M is a permutation", () => { check_is_perm("M") });
+    test("E is a permutation", () => { check_is_perm("E") });
+    test("S is a permutation", () => { check_is_perm("S") });
+});
+
+function check_corners_static(i) {
+    var corners = [0, 2, 6, 8, 9, 11, 15, 17, 18, 20, 24, 26, 27, 29, 33, 35, 36, 38, 42, 44, 45, 47, 51, 53];
+    for (var j in corners) {
+        expect(base_moves[i][corners[j]]).toBe(corners[j]);
+    }
+}
+
+describe("corners_static", () => {
+    test("M has static corners", () => { check_corners_static("M") });
+    test("E has static corners", () => { check_corners_static("E") });
+    test("S has static corners", () => { check_corners_static("S") });
 });
