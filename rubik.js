@@ -121,7 +121,7 @@ function is_in_order(list) {
 }
 
 function parse(moves) {
-    if (!moves.match(/(:?[UDLRFB](:?'|2)?)+/)) {
+    if (!moves.match(/(:?[UDLRFBMES](:?'|2)?)+/)) {
         throw "Invalid move string";
     }
     var out = [];
