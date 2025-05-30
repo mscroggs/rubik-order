@@ -9,6 +9,9 @@ describe("parse_and_calculate_order", () => {
     test("Order of B is 4", () => { expect(parse_and_calculate_order("B")).toBe(4); });
     test("Order of U is 4", () => { expect(parse_and_calculate_order("U")).toBe(4); });
     test("Order of D is 4", () => { expect(parse_and_calculate_order("D")).toBe(4); });
+    test("Order of M is 4", () => { expect(parse_and_calculate_order("M")).toBe(4); });
+    test("Order of E is 4", () => { expect(parse_and_calculate_order("E")).toBe(4); });
+    test("Order of S is 4", () => { expect(parse_and_calculate_order("S")).toBe(4); });
 
     test("Order of L' is 4", () => { expect(parse_and_calculate_order("L'")).toBe(4); });
     test("Order of R' is 4", () => { expect(parse_and_calculate_order("R'")).toBe(4); });
@@ -16,6 +19,9 @@ describe("parse_and_calculate_order", () => {
     test("Order of B' is 4", () => { expect(parse_and_calculate_order("B'")).toBe(4); });
     test("Order of U' is 4", () => { expect(parse_and_calculate_order("U'")).toBe(4); });
     test("Order of D' is 4", () => { expect(parse_and_calculate_order("D'")).toBe(4); });
+    test("Order of M' is 4", () => { expect(parse_and_calculate_order("M'")).toBe(4); });
+    test("Order of E' is 4", () => { expect(parse_and_calculate_order("E'")).toBe(4); });
+    test("Order of S' is 4", () => { expect(parse_and_calculate_order("S'")).toBe(4); });
 
     test("Order of L2 is 2", () => { expect(parse_and_calculate_order("L2")).toBe(2); });
     test("Order of R2 is 2", () => { expect(parse_and_calculate_order("R2")).toBe(2); });
@@ -23,6 +29,9 @@ describe("parse_and_calculate_order", () => {
     test("Order of B2 is 2", () => { expect(parse_and_calculate_order("B2")).toBe(2); });
     test("Order of U2 is 2", () => { expect(parse_and_calculate_order("U2")).toBe(2); });
     test("Order of D2 is 2", () => { expect(parse_and_calculate_order("D2")).toBe(2); });
+    test("Order of M2 is 2", () => { expect(parse_and_calculate_order("M2")).toBe(2); });
+    test("Order of E2 is 2", () => { expect(parse_and_calculate_order("E2")).toBe(2); });
+    test("Order of S2 is 2", () => { expect(parse_and_calculate_order("S2")).toBe(2); });
 
     test("Order of RR' is 1", () => {
         expect(parse_and_calculate_order("RR'")).toBe(1);
